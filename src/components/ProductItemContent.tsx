@@ -1,79 +1,60 @@
-import { useActiveId, usePrescriptionItem } from "../lib/hooks";
+import { StarIcon } from "@radix-ui/react-icons";
+import { useActiveIdContext, useProductItem } from "../lib/hooks";
 import BookmarkIcon from "./BookmarkIcon";
 
 export default function ProductItemContent() {
-  const activeId = useActiveId();
-  const prescriptionItem = usePrescriptionItem(activeId);
-  if (!prescriptionItem) {
+  const { activeId } = useActiveIdContext();
+  const { fetchedProduct } = useProductItem(activeId);
+
+  if (!fetchedProduct) {
     return <EmptyProductContent />;
   }
-
-  const { article, prescriber } = prescriptionItem;
+  const {
+    id,
+    name,
+    price,
+    description,
+    countInStock,
+    slug,
+    image,
+    averageRating,
+  } = fetchedProduct;
 
   return (
     <section className="product-details">
       <div>
-        <img src="../../public/hero.jpg" alt="#" />
-        <section className="product-info">
-          <div className="product-info__left">
-            <div className="product-info__badge">
-              <img src="../../public/download.jpeg" width="50px" />
-            </div>
-            <div className="product-info__below-badge">
-              <time className="product-info__time">{article.stockStatus}</time>
-
-              <BookmarkIcon />
-            </div>
-          </div>
-
-          <div className="product-info__right">
-            <h2 className="second-heading">{article.productLongName}</h2>
-            <p className="product-info__company">{article.header}</p>
-            <p className="product-info__description">{article.preamble}</p>
-          </div>
-        </section>
-
-        <div className="product-details__other">
-          <section className="qualifications">
-            <div className="qualifications__left">
-              <h4 className="fourth-heading">Prescriber</h4>
-            </div>
-            <div>
-              <p className="qualifications__item">{prescriber.name}</p>
-            </div>
-          </section>
-
-          <section className="qualifications">
-            <div className="reviews__left">
-              <h4 className="fourth-heading">Workplace</h4>
-            </div>
-            <div>
-              <p className="qualifications__item">{prescriber.workplace}</p>
-            </div>
-          </section>
-          <section className="qualifications">
-            <div className="reviews__left">
-              <h4 className="fourth-heading">Profession</h4>
-            </div>
-            <div>
-              <p className="qualifications__item">{prescriber.profession}</p>
-            </div>
-          </section>
-          <section className="qualifications">
-            <div className="reviews__left">
-              <h4 className="fourth-heading">Phone Nr.</h4>
-            </div>
-            <div>
-              <p className="qualifications__item">{prescriber.phoneNumber}</p>
-            </div>
-          </section>
+        <div>
+          <img src={image} alt="top view of product image" width="50px" />
+          <img src={image} alt="closeup product image" width="50px" />
+          <img src={image} alt="detailed image" width="50px" />
         </div>
-
-        <footer className="product-details__footer">
-          <p className="product-details__footer-text">
-            Please do not share this informations!
-          </p>
-        </footer>
+        <div>
+          <img src={image} alt="main product image" width="200px" />
+        </div>
+        <div>
+          <h1>{name}</h1>
+          <span>
+            <span>FROM </span>
+            {`${price} sek`}
+            <div>
+              <div>
+                <StarIcon />
+                <StarIcon />
+                <StarIcon />
+                <StarIcon />
+                <StarIcon />
+              </div>
+            </div>
+          </span>
+          <div className="product-info__right">
+            <p className="product-info__description">{description}</p>
+          </div>
+          <div>
+            <p className="qualifications__item">
+              Average reating {averageRating}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

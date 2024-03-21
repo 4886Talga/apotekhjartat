@@ -1,28 +1,25 @@
 import ProductListItem from "./ProductListItem";
 import Spinner from "./Spinner";
-import { Prescription } from "../lib/types";
-import { useActiveId } from "../lib/hooks";
+import { ProductItemExpended } from "../lib/types";
+import { useActiveIdContext } from "../lib/hooks";
 
 type ProductListProps = {
-  filteredPrescriptions: Prescription[];
+  filteredProducts: ProductItemExpended[];
   isLoading: boolean;
 };
 
-export function ProductList({
-  filteredPrescriptions,
-  isLoading,
-}: ProductListProps) {
-  const activeId = useActiveId();
+export function ProductList({ filteredProducts, isLoading }: ProductListProps) {
+  const { activeId } = useActiveIdContext();
 
   return (
     <ul className="product-list">
       {isLoading && <Spinner />}
       {!isLoading &&
-        filteredPrescriptions.map((prescription) => (
+        filteredProducts.map((product) => (
           <ProductListItem
-            prescription={prescription}
-            key={prescription.prescriptionId}
-            isActive={prescription.prescriptionId === activeId}
+            product={product}
+            key={product.id}
+            isActive={product.id === activeId}
           />
         ))}
     </ul>

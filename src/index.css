@@ -445,6 +445,42 @@ body::-webkit-scrollbar {
   color: #9fa6b0;
 }
 
+/* SORTING */
+.sorting {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sorting > i {
+  font-size: 11px;
+  color: #4c4f50;
+  margin-right: 5px;
+}
+
+.sorting__button {
+  font-size: 10px;
+  text-transform: uppercase;
+  background-color: #e8edf0;
+  padding: 6px 8px;
+  border-radius: 3px;
+  margin-left: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sorting__button:hover,
+.sorting__button:focus {
+  background-color: #d0d5d8;
+}
+
+.sorting__button--active,
+.sorting__button--active:hover,
+.sorting__button--active:focus {
+  color: #fff;
+  background-color: #3c4041;
+}
+
 /* product DETAILS */
 .product-details {
   flex: 1;
@@ -480,18 +516,12 @@ body::-webkit-scrollbar {
 }
 
 .product-details > div {
-  height: 100%;
-}
-
-.product-details > div > img {
-  width: 100%;
-  height: 174px;
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  object-fit: cover;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   border-top-right-radius: 8px;
   user-select: none;
+  height: 100%;
 }
 
 .product-details__other {
@@ -732,4 +762,72 @@ body::-webkit-scrollbar {
 
 .spinner--visible {
   visibility: visible;
+}
+
+/* BOOKMARKS BTN */
+.bookmarks-btn {
+  text-transform: lowercase;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-left: 13px;
+  padding-left: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.bookmarks-btn::before {
+  content: "";
+  height: 15px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bookmarks-btn--active,
+.bookmarks-btn:hover,
+.bookmarks-btn:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+.bookmarks-btn--active .bookmarks-btn__icon,
+.bookmarks-btn:hover .bookmarks-btn__icon,
+.bookmarks-btn:focus .bookmarks-btn__icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bookmarks-btn__icon {
+  font-size: 10px;
+  margin-left: 2px;
+  transform: translateY(-1px);
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s;
+}
+
+.bookmarks-popover {
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  background-color: #fff;
+  min-height: 76px;
+  min-width: 340px;
+  width: 340px;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+  transform: translateX(-50%);
+  transform-origin: left;
+  transition: all 0.2s;
+  /* pointer-events: none; */
+
+  position: fixed;
+  left: 50%;
+  top: 150px;
 }

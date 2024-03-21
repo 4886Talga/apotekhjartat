@@ -1,17 +1,17 @@
 import BookmarkIcon from "./BookmarkIcon";
-import { Prescription } from "../lib/types";
+import { ProductItemExpended } from "../lib/types";
 
 type ProductListItem = {
-  prescription: Prescription;
+  product: ProductItemExpended;
   isActive: boolean;
 };
 
 export default function ProductListItem({
-  prescription,
+  product,
   isActive,
 }: ProductListItem) {
-  const { article } = prescription;
-  const inStock = article.stock! > 0 ? true : false;
+  const { countInStock, name, description, image } = product;
+  const inStock = countInStock > 0 ? true : false;
 
   return (
     <li
@@ -19,22 +19,19 @@ export default function ProductListItem({
         isActive ? " background-pink" : !inStock ? " background-red" : ""
       }`}
     >
-      <a
-        href={`#${prescription.prescriptionId}`}
-        className="product-item__link"
-      >
+      <a href={`#${product.id}`} className="product-item__link">
         <div className="product-item__badge">
-          <img src="../../public/apj_logga_pink.png" width="38px" />
+          <img src={image} width="38px" />
         </div>
 
         <div className="product-item__middle">
-          <h3 className="third-heading">{article.productName}</h3>
-          <p className="product-item__company">{article.preamble}</p>
+          <h3 className="third-heading">{name}</h3>
+          <p className="product-item__company">{description}</p>
         </div>
 
         <div className="product-item__right">
-          <BookmarkIcon />
-          <time className="product-item__time">{article.stock}</time>
+          <BookmarkIcon id={product.id} />
+          <time className="product-item__time">{countInStock}</time>
         </div>
       </a>
     </li>

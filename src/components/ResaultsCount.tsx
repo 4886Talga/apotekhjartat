@@ -1,13 +1,10 @@
-type ResultsCountProps = {
-  totalNumberOfResults: number;
-};
+import { useProductItemsContext } from "../lib/hooks";
 
-export default function ResultsCount({
-  totalNumberOfResults,
-}: ResultsCountProps) {
+export default function ResultsCount() {
+  const { count: totalNumberOfResults } = useProductItemsContext();
   return (
     <p className="count">
-      <span className="u-bold">{totalNumberOfResults}</span> prescriptions
+      <span className="u-bold">{totalNumberOfResults}</span> products
     </p>
   );
 }

@@ -1,13 +1,10 @@
-import { useproductItemsContext } from "../lib/hooks";
-import productList from "./ProductList";
+import { useProductItemsContext } from "../lib/hooks";
+import ProductList from "./ProductList";
 
-export default function productListSearch() {
-  const { productItemsSortedAndSliced, isLoading } = useproductItemsContext();
+export default function ProductListSearch() {
+  const { filteredProducts, isLoading } = useProductItemsContext();
 
   return (
-    <productList
-      productItems={productItemsSortedAndSliced}
-      isLoading={isLoading}
-    />
+    <ProductList filteredProducts={filteredProducts} isLoading={isLoading} />
   );
 }
